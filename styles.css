@@ -77,6 +77,18 @@ body, html {
     color: black;
     text-align: center;
 }
+p{
+    font-family: 'Righteous', 'Cascadia Code SemiBold', sans-serif;
+    color: #4765FF;
+    text-align: center;
+    white-space: nowrap;
+    font-size: 10px;
+    position: absolute;
+    bottom: 10%;
+    border: 1px solid #4765FF;
+    border-radius: 20px;
+    padding: 3px;
+}
 
 /* Example of a media query for screens that are 600px or less (common for phones) */
 @media only screen and (max-width: 600px) {
