@@ -88,7 +88,11 @@ p{
     border: 1px solid #4765FF;
     border-radius: 20px;
     padding: 3px;
+<<<<<<< HEAD
     
+=======
+}
+>>>>>>> 690f7697708861a118771fface7f78c9a6d43262
 
 }
 /* Example of a media query for screens that are 600px or less (common for phones) */
