@@ -7,75 +7,79 @@ body, html {
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    
 }
-.container {
-    width: 80%;
-    height: 90%;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    margin: auto;
-    z-index: 1;
-}
-
-.consent-box {
-    text-align: left;
-    padding: 20px;
-    padding-top: 10px;
-    background: white;
-    border: 2px solid #ccc;
+.login-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
     box-shadow: 0 0 10px 0 rgba(0,0,0,0.1);
+    padding: 30px;
+    width: 300px;
+    background: white;
+    max-width: 300px; /* Added max-width */
     border-radius: 10px;
-    height: 100%;
-    overflow: auto;
 }
-h1{
-    margin-top: 15px;
-    margin-bottom: 20px;
-    font-size: 45px;
+.login-container h2{
+    text-align: left;
     font-weight: bold;
-}
-.consent-text {
-    flex: 1; /* 변경 */
-    overflow-y: auto;
-}
-.consent-radio {
-    margin-top: 20px;
-    border-radius: 10px;
-    overflow-y: auto;
-    margin-bottom: 20px;
+    color: black;
     font-weight: bold;
+    font-size: 40px;
+    margin-top: 0;
+    margin-bottom: 15px;
 }
-.next-button {
-    margin-top: 20px;
-    background-color: #4765FF;
+input[type="text"], input[type="password"] {
+    width: calc(100%); /* full width minus padding and border */
+    padding: 10px;
+    margin: 10px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+button {
+    background-color:#4765FF;
     color: white;
+    font-size: 15px;
     padding: 14px 20px;
+    margin: 10px 0;
     border: none;
     cursor: pointer;
     width: 100%;
-    border-radius: 10px;
-    font-size: 18px;
     font-weight: bold;
 }
-.next-button:hover {
+button:hover {
     background-color: #132daf;
+}
+a {
+    display: flex;
+    justify-content: center;
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: dodgerblue;
+    font-size: 11px;
+    text-align: center;
+    align-items: center;
+    height: 100%;
+    display: block;
+}
+a span {
+    width: 100%; /* 가로 가운데 정렬을 위해 너비를 100%로 설정 */
 }
 
 /*배경의 원 설정*/
 .background {
-    position: fixed;
+    position: relative;
     width: 100%;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
     box-sizing: border-box;
     flex-shrink: 0;
     z-index: -1;
-    top: 0;
-    left: 0;
     
 }
 
@@ -92,7 +96,6 @@ h1{
     height: 200px;
     top: 30%;
     left: 30%;
-    opacity: 0.5;
     transform: translate(-50%, -50%);
 }
 
@@ -145,38 +148,38 @@ h1{
     top: 10%;
     transform: translate(50%, 200%);
 }
+
+/* Media Queries for Mobile Devices */
 @media only screen and (max-width: 600px) {
-    .container {
-        width: 80%; /* 모바일 화면에 맞게 너비 조정 */
-        height: 90%;
-
+    .login-container {
+        width: 70%;
+    }
+    input[type="text"],
+    input[type="password"],
+    button,
+    a {
+        width: calc(100%); /* Adjusted width */
+        font-size: 10px; /* Decreased font size */
+        display: flex; /* Flexbox 사용 */
+        justify-content: center; /* 수평 가운데 정렬 */
+        align-items: center; /* 수직 가운데 정렬 */
+        height: 100%; /* 부모 요소의 높이만큼 요소 확장 */
     }
 
-    .consent-box {
-        padding: 10px; /* 모바일에 맞게 패딩 조정 */
-    }
-
-    h1{
-        font-size: 24px;
-    }
-    .consent-text h2{
-        font-size: 17px;
-    }
-    .consent-text h3{
-        font-size: 15px;
-    }
-    .consent-text p{
-        font-size: 12px;
-    }
-
-    .consent-radio{
-        font-size: 14px;
+    .login-container h2 {
+        font-size: 30px; /* Decreased font size */
         font-weight: bold;
     }
 
-    .next-button {
-        font-size: 16px; /* 모바일에 맞게 폰트 크기 조정 */
+    button {
+        font-size: 12px; /* Decreased font size */
+        padding: 10px 20px; /* Decreased padding */
     }
+
+    a span {
+        width: 100%; /* 스팬 요소의 너비를 100%로 유지 */
+    }
+
     .winterblue {
         width: 150px;
         height: 150px;
@@ -206,4 +209,11 @@ h1{
         width: 70px;
         height: 70px;
     }
+    .title {
+        font-size: 40px;
+    }
+    p {
+        font-size: 8px;
+    }
+    
 }

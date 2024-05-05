@@ -111,10 +111,22 @@ p{
     border: 1px solid #4765FF;
     border-radius: 20px;
     padding: 3px;
+<<<<<<< HEAD
     cursor: pointer;
+=======
+<<<<<<< HEAD
+    
+=======
+>>>>>>> d0bc24d94756f79cc68320e305e56bbddce3e9e0
 }
+>>>>>>> 690f7697708861a118771fface7f78c9a6d43262
 
+<<<<<<< HEAD
 /* 미디어 쿼리 추가 */
+=======
+}
+/* Example of a media query for screens that are 600px or less (common for phones) */
+>>>>>>> d0bc24d94756f79cc68320e305e56bbddce3e9e0
 @media only screen and (max-width: 600px) {
     .winterblue {
         width: 150px;
