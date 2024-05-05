@@ -1,0 +1,86 @@
+body, html {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    font-family: 'Righteous', 'Cascadia Code SemiBold', 'Jaro', 'Poetsen One', 'Arial' sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    
+}
+.container {
+    width: 80%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+}
+
+.consent-box {
+    text-align: left;
+    padding: 20px;
+    padding-top: 10px;
+    background: white;
+    border: 2px solid #ccc;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.1);
+    border-radius: 10px;
+    height: 100%;
+    overflow: auto;
+}
+.consent-text {
+    flex: 1; /* 변경 */
+    overflow-y: auto;
+}
+.consent-radio {
+    margin-top: 20px;
+    border-radius: 10px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+}
+.next-button {
+    margin-top: 20px;
+    background-color: #4765FF;
+    color: white;
+    padding: 14px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+}
+.next-button:hover {
+    background-color: #132daf;
+}
+@media only screen and (max-width: 600px) {
+    .container {
+        width: 80%; /* 모바일 화면에 맞게 너비 조정 */
+        height: 90%;
+    }
+
+    .consent-box {
+        padding: 10px; /* 모바일에 맞게 패딩 조정 */
+    }
+
+    h1{
+        font-size: 26px;
+    }
+    .consent-text h2{
+        font-size: 20px;
+    }
+    .consent-text h3{
+        font-size: 16px;
+    }
+    .consent-text p{
+        font-size: 12px;
+    }
+
+    .consent-radio{
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .next-button {
+        font-size: 16px; /* 모바일에 맞게 폰트 크기 조정 */
+    }
+}
