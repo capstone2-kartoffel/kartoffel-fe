@@ -8,64 +8,75 @@ body, html {
     align-items: center;
     overflow: hidden;
 }
-.login-container {
-    position: absolute;
+.signup-container {
+    width: 400px;
+    height: 80%;
     top: 50%;
-    left: 50%;
+    left:50%;
     transform: translate(-50%, -50%);
+    display: flex;
+    position: absolute;
     text-align: center;
-    box-shadow: 0 0 10px 0 rgba(0,0,0,0.1);
     padding: 30px;
-    width: 300px;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.1);
     background: white;
-    max-width: 300px; /* Added max-width */
+    z-index: 1;
+    border: 2px solid #BCCBFF;
+    max-width: 400px; /* Added max-width */
     border-radius: 10px;
+    overflow: auto;
 }
-.login-container h2{
-    text-align: left;
-    font-weight: bold;
-    color: black;
-    font-weight: bold;
+#signupForm{
+    flex:1;
+
+}
+h1{
+    text-align: center;
     font-size: 40px;
+    font-weight: bold;
     margin-top: 0;
-    margin-bottom: 15px;
 }
-input[type="text"], input[type="password"] {
-    width: calc(100%); /* full width minus padding and border */
+h2{
+    text-align: left;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 0;
+    margin-top: 35px;
+}
+
+input[type="text"], input[type="password"], input[type="tel"] {
+    width: calc(100%);
     padding: 10px;
-    margin: 10px 0;
+    margin:0;
     display: inline-block;
     border: 1px solid #ccc;
     box-sizing: border-box;
+    border-radius: 10px;
 }
 button {
-    background-color:#4765FF;
+    background-color: #4765FF;
     color: white;
-    font-size: 15px;
     padding: 14px 20px;
-    margin: 10px 0;
+    margin-bottom: 0x;
     border: none;
     cursor: pointer;
     width: 100%;
     font-weight: bold;
+    font-size: 15px;
+    border-radius: 10px;
 }
 button:hover {
     background-color: #132daf;
 }
 a {
-    display: flex;
-    justify-content: center;
-    margin-top: 0;
+    display: block;
+    margin-top: 10px;
     margin-bottom: 15px;
     color: dodgerblue;
-    font-size: 11px;
+    font-size: 12px;
     text-align: center;
     align-items: center;
-    height: 100%;
-    display: block;
-}
-a span {
-    width: 100%; /* 가로 가운데 정렬을 위해 너비를 100%로 설정 */
+    padding-bottom: 20px;
 }
 
 /*배경의 원 설정*/
@@ -148,36 +159,47 @@ a span {
     top: 10%;
     transform: translate(50%, 200%);
 }
-
-/* Media Queries for Mobile Devices */
-@media only screen and (max-width: 600px) {
-    .login-container {
+@media screen and (max-width: 600px) {
+    .signup-container {
         width: 70%;
+        height: 90%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 15px;
+        max-width: none;
+        
     }
+
+    h1 {
+        font-size: 28px;
+        margin-bottom: 13px;
+    }
+
+    h2 {
+        font-size: 16px;
+        margin-top: 10px;
+    }
+
     input[type="text"],
     input[type="password"],
-    button,
-    a {
-        width: calc(100%); /* Adjusted width */
-        font-size: 10px; /* Decreased font size */
-        display: flex; /* Flexbox 사용 */
-        justify-content: center; /* 수평 가운데 정렬 */
-        align-items: center; /* 수직 가운데 정렬 */
-        height: 100%; /* 부모 요소의 높이만큼 요소 확장 */
-    }
-
-    .login-container h2 {
-        font-size: 30px; /* Decreased font size */
-        font-weight: bold;
+    input[type="tel"] {
+        width: calc(100%);
+        padding: 10px;
+        margin: 8px 0;
+        border-radius: 8px;
+        font-size: 12px;
     }
 
     button {
-        font-size: 12px; /* Decreased font size */
-        padding: 10px 20px; /* Decreased padding */
+        padding: 12px 12px;
+        margin-bottom: 10px;
+        font-size: 13px;
     }
-
-    a span {
-        width: 100%; /* 스팬 요소의 너비를 100%로 유지 */
+    a{
+        padding-bottom: 10px;
+        margin-bottom: 0;
+        font-size: 11px;
     }
 
     .winterblue {
@@ -209,11 +231,4 @@ a span {
         width: 70px;
         height: 70px;
     }
-    .title {
-        font-size: 40px;
-    }
-    p {
-        font-size: 8px;
-    }
-    
 }
