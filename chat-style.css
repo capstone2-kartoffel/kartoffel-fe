@@ -1,0 +1,53 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 20px;
+}
+#chat-container {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 500px;
+    height: 400px;
+    overflow-y: scroll;
+    margin-bottom: 10px;
+}
+.message {
+    padding: 5px;
+    border-radius: 5px;
+    margin: 5px 0;
+    max-width: 80%;
+}
+.customer {
+    background-color: #ffff99; /* 고객 메시지 배경색을 노랑색으로 변경 */
+    color: #333;
+    align-self: flex-start;
+    margin-left: 0;
+    margin-right: auto;
+}
+.ai {
+    background-color: #99ccff; /* AI 메시지 배경색을 파랑색으로 변경 */
+    color: #333;
+    align-self: flex-end;
+    margin-right: 0;
+    margin-left: auto;
+}
+#message-input {
+    width: calc(100% - 110px);
+    padding: 10px;
+    margin-right: 5px;
+    box-sizing: border-box; /* input field와 button이 같은 라인에 있도록 함 */
+}
+#send-btn {
+    width: 100px;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+#send-btn:hover {
+    background-color: #0056b3;
+    cursor: pointer;
+}

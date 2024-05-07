@@ -173,7 +173,7 @@ function validateForm() {
         .then(data => {
             console.log('Success:', data);
             if (data.status === 'success') {
-                window.location.href = 'signup_success.html'; // Redirect to signup_success.html on success
+                window.location.href = 'signup_sgituccess.html'; // Redirect to signup_success.html on success
             } else {
                 alert('Email already exists. Please try with the other one.'); // Optionally handle other statuses or errors
             }
