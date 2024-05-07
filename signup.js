@@ -182,5 +182,5 @@ function validateForm() {
             console.error('Error:', error);
             alert('An error occurred. Please try again later.');
         });
-    return false;
+    return true;
 };
