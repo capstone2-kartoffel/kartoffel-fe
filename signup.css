@@ -47,7 +47,7 @@ h2{
 input[type="text"], input[type="password"], input[type="tel"] {
     width: calc(100%);
     padding: 10px;
-    margin:0;
+    margin-bottom:10px;
     display: inline-block;
     border: 1px solid #ccc;
     box-sizing: border-box;
@@ -57,7 +57,7 @@ button {
     background-color: #4765FF;
     color: white;
     padding: 14px 20px;
-    margin-bottom: 0x;
+    margin-bottom: 20px;
     border: none;
     cursor: pointer;
     width: 100%;
