@@ -5,25 +5,32 @@ body, html {
     justify-content: center;
     align-items: center;
     margin: 0;
-    overflow: hidden; /* 기존 overflow 속성 유지 */
+    overflow: hidden;
+    /*display: flex;
+    flex-direction: column;*/
 }
-
-body {
-    position: relative; /* 배경 원이 body 안에 위치하도록 보장 */
-}
-
-h1 {
+h1{
     text-align: center;
     flex-direction: column;
-    font-size: 48px;
+    font-size: 40px;
     font-weight: bold;
 }
-
-#chat-outline {
-    height: 80%; /* 원하는 높이로 조정 */
+#total-outline {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+}
+#chat-outline{
+    height: 80%; /* 원하는 높이로 조정 */
+    display: flex;
+    flex-direction: column;
+    /*top: 50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    position: absolute;*/
+    align-items: center;
+    text-align: center;
     justify-content: center;
     width: 50%;
     margin: auto;
@@ -32,15 +39,17 @@ h1 {
     z-index: 1;
     border: 2px solid #BCCBFF;
     border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 20px;
+    
 }
-
 #chat-container,
 .send-container {
     width: 100%;
     box-sizing: border-box;
     margin: auto;
 }
-
 #chat-container {
     height:100%;
     max-height: 100%;
@@ -50,13 +59,11 @@ h1 {
     overflow-y: scroll;
     overflow-y: hidden;
 }
-
 #chat-container:hover {
     overflow-y: auto; /* Display the vertical scrollbar on hover */
     scrollbar-width: thin;
     scrollbar-color: #888 transparent;
 }
-
 .message {
     padding: 10px;
     border-radius: 5px;
@@ -65,7 +72,6 @@ h1 {
     word-wrap: break-word;
     display: inline-block;
 }
-
 .customer {
     background-color: #4765FF; /* 고객 메시지 배경색 */
     color: white;
@@ -75,9 +81,8 @@ h1 {
     margin-right: 10px;
     text-align: right;
 }
-
 .ai {
-    background-color: #dce3fc; /* AI 메시지 배경색 */
+    background-color: #BCCBFF; /* AI 메시지 배경색 */
     color: black;
     font-family: 'Malgun Gothic';
     align-self: flex-end;
@@ -85,41 +90,8 @@ h1 {
     margin-left: 10px;
     text-align: left;
 }
-
-/*menu style*/
-
-.menu-container {
-    border-radius: 5px;
-    background-color: #dce3fc;
-    display: flex;
-    flex-direction: column; /* 세로 정렬을 위해 flex-direction을 column으로 설정 */
-    max-width: 50%;
-    gap: 10px;
-    margin-top: 10px;
-    padding: 10px;
-}
-
-.menu-button {
-    background-color: #6a83fd;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-.menu-button:hover {
-    background-color: #3751d6;
-}
-
-.menu-button:disabled {
-    background-color: #D9D9D9;
-    color: black;
-    cursor: not-allowed;
-}
-
 /*보내기 버튼*/
-.send-container {
+.send-container{
     display: flex;
     align-items: center;
     margin-bottom: 0;
@@ -127,7 +99,6 @@ h1 {
     height: auto;
     border-top: 2px solid #BCCBFF;
 }
-
 #message-input {
     width: calc(100%);
     padding: 10px;
@@ -135,7 +106,6 @@ h1 {
     height: 50px; /* 텍스트 입력 필드의 높이 설정 (상하 여백 포함) */
     border: none;
 }
-
 #send-btn {
     background-image: url('send_icon.png');
     background-size: 50%;
@@ -148,26 +118,42 @@ h1 {
     border: none;
     cursor:pointer;
 }
-
 #send-btn:hover {
     background-color: #71acec;
     cursor: pointer;
 }
-
-.menu-container {
+.menu-container{
     margin-left: 10px;
     margin-right: auto;
+}
+#chat-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+    width: 50%; /* Adjust width if needed */
+    margin:auto;
+}
+
+#reset-btn, #kor-btn, #eng-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #BCEFFF;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
 }
 
 /*배경원 설정*/
 .circle {
-    position: absolute;
+    position: relative;
     border-radius: 50%;
     opacity: 0.7;
     z-index: -1;
 }
 
 .winterblue {
+    position: absolute;
     background-color: #4765FF;
     width: 200px;
     height: 200px;
@@ -177,6 +163,7 @@ h1 {
 }
 
 .springlightblue {
+    position: absolute;
     background-color: #BCEFFF;
     opacity: 0.5;
     width: 300px;
@@ -187,8 +174,10 @@ h1 {
 }
 
 .summerlightblue {
-    background-color: #BCCBFF;
+    position: absolute;
+    background-color:  #BCCBFF;
     opacity: 0.5;
+    justify-content: center;
     width: 400px;
     height: 400px;
     top: 50%;
@@ -197,16 +186,17 @@ h1 {
 }
 
 .autumnmuteblue {
+    position: absolute;
     background-color: #9EB9E3;
     width: 140px;
     height: 140px;
     opacity: 0.5;
     right: 75%;
-    bottom: 10%;
+    bottom: 20%;
     transform: translate(30%, 30%);
 }
-
-.summermuteblue {
+.summermuteblue{
+    position: absolute;
     background-color: #C1E0EA;
     width: 90px;
     height: 90px;
@@ -215,8 +205,8 @@ h1 {
     left: 10%;
     transform: translate(100%, 100%);
 }
-
-.grey {
+.grey{
+    position: absolute;
     background-color: #D9D9D9;
     width: 100px;
     height: 100px;
@@ -225,19 +215,49 @@ h1 {
     transform: translate(50%, 200%);
 }
 
-@media only screen and (max-width: 800px) {
-    body, html {
-        overflow: hidden;
-        height: 100%;
-        width: 100%;
-        justify-content: center;
-        align-items: center;
-    }
+@media only screen and (max-width: 600px) {
     #chat-outline {
         width: 90%;
         height: 75%;
+        padding-top: 10px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
     }
-    #chat-container {
-        overflow-y: auto;
+    h1 {
+        font-size: 30px; /* 모바일 화면에 더 맞는 사이즈로 조정 */
+    }
+    #chat-outline {
+        width: 90%;
+        padding-top: 10px;
+    }
+
+    #reset-btn, #kor-btn, #eng-btn {
+        font-size: 14px;
+    }
+    .winterblue {
+        width: 150px;
+        height: 150px;
+    }
+    .springlightblue {
+        width: 200px;
+        height: 200px;
+    }
+    .summerlightblue {
+        width: 250px;
+        height: 250px;
+    }
+    .autumnmuteblue {
+        width: 100px;
+        height: 100px;
+    }
+    .summermuteblue {
+        width: 70px;
+        height: 70px;
+    }
+    .grey {
+        width: 70px;
+        height: 70px;
     }
 }

@@ -9,193 +9,33 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
 <body>
-    <h1>Space Chat2</h1>
-    <div id="chat-container"></div>
-    <input type="text" id="message-input" placeholder="메시지를 입력하세요">
-    <button id="send-btn">메시지 보내기</button>
+    <h1>Space Chat</h1>
+    <div id="chat-outline">
+        <div id="chat-container">
+            <!-- 메뉴 버튼 컨테이너 추가 -->
+            <!--<div class="menu-container" id="menu-container"></div>-->
+        </div>
+        <div class="send-container">
+            <input type="text" id="message-input" placeholder="메시지를 입력하세요">
+            <button id="send-btn" aria-label="메시지 보내기"></button>
+        </div>
+    </div>
+
+    
     <button id="reset-btn">초기화</button>
     <button id="kor-btn">KOR</button>
     <button id="eng-btn">ENG</button>
+    
+    <div class="background">
+        <div class="circle winterblue"></div>
+        <div class="circle summerlightblue"></div>
+        <div class="circle springlightblue"></div>
+        <div class="circle autumnmuteblue"></div>
+        <div class="circle summermuteblue"></div>
+        <div class="circle grey"></div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script>
-        var my_id = '0';
-        var my_ai_pre_message = '';
-        var userEmail = '';
-
-        function sendMessage(messageToSend = null, selectedDateTime = null, reset = false) {
-            var chatContainer = document.getElementById('chat-container');
-            var messageInput = document.getElementById('message-input');
-            var message = messageToSend || messageInput.value.trim();
-            if (reset) {
-                my_id = '0';
-            }
-            if (message) {
-                var customerMsg = document.createElement('div');
-                customerMsg.classList.add('message', 'customer');
-                customerMsg.textContent = message;
-                chatContainer.appendChild(customerMsg);
-
-                var url = `http://spacechat.co.kr:60000/send_message/?my_id=${my_id}&email=${encodeURIComponent(userEmail)}&message=${encodeURIComponent(message)}&my_ai_pre_message=${my_ai_pre_message}&selectedDateTime=${selectedDateTime}`;
-                
-                fetch(url)
-                    .then(response => response.json())
-                    .then(data => {
-                        if (!reset) {
-                            my_id = data.my_id;
-                            my_ai_pre_message = data.return_message;
-                        }
-                        var aiMsg = document.createElement('div');
-                        aiMsg.classList.add('message', 'ai');
-                        aiMsg.innerHTML = data.return_message.replace(/\n/g, '<br>');
-                        chatContainer.appendChild(aiMsg);
-
-                        var menuItems = data.return_menu.split(',');
-                        //console.log(menuItems)
-                        //날짜위젯이 오면, datw widget 띄워줌
-                        if (menuItems.includes('날짜위젯')) {
-                            handleDateWidget(); 
-                        } //확인이 오면, 버튼 생성
-                        else if (menuItems.includes('확인')) {
-                            var confirmButton = document.createElement('button');
-                            confirmButton.textContent = '확인';
-                            confirmButton.classList.add('menu-button'); // Add a class for styling if needed
-                            confirmButton.onclick = function() {
-                                sendMessage('확인');
-                                sendMessage(selectedDateTime); // sendMessage 함수로 선택된 날짜와 시간 전송
-                            };
-                            chatContainer.appendChild(confirmButton);
-                        } else {
-                            var menuContainer = document.createElement('div');
-                            menuContainer.classList.add('menu-container');
-                            menuItems.forEach(item => {
-                                var button = document.createElement('button');
-                                button.textContent = item.trim();
-                                button.classList.add('menu-button');
-                                button.onclick = function() { sendMessage(item.trim()); };
-                                menuContainer.appendChild(button);
-                            });
-
-                            chatContainer.appendChild(menuContainer);
-                        }
-
-                        chatContainer.scrollTop = chatContainer.scrollHeight;
-                    })
-
-                    .catch(error => {
-                        console.error('Error:', error);
-                        var errorMsg = document.createElement('div');
-                        errorMsg.classList.add('message', 'error');
-                        errorMsg.textContent = '오류 발생: ' + error;
-                        chatContainer.appendChild(errorMsg);
-                    });
-
-                if (!messageToSend) {
-                    messageInput.value = '';
-                }
-                chatContainer.scrollTop = chatContainer.scrollHeight;
-            }
-        }
-        function changeLanguage(language) {
-            var messageInput = document.getElementById('message-input');
-            var button = language === 'kor' ? document.getElementById('kor-btn') : document.getElementById('eng-btn');
-            button.disabled = true;
-
-            translateMessages(language)
-                .then(translatedMessages => {
-                    messageInput.placeholder = translatedMessages.placeholder;
-                    document.getElementById('send-btn').textContent = translatedMessages.sendBtnText;
-                    document.getElementById('reset-btn').textContent = translatedMessages.resetBtnText;
-                    button.disabled = false;
-                })
-                .catch(error => {
-                    console.error('Error translating messages:', error);
-                    alert('메시지를 번역하는 동안 오류가 발생했습니다.');
-                    button.disabled = false;
-                });
-        }
-
-        function translateMessages(targetLanguage) {
-            return new Promise((resolve, reject) => {
-                var translatedMessages = {};
-                // 플레이스홀더와 버튼 텍스트를 번역
-                var placeholderText = targetLanguage === 'kor' ? '메시지를 입력하세요' : 'Enter your message';
-                var sendBtnText = targetLanguage === 'kor' ? '메시지 보내기' : 'Send Message';
-                var resetBtnText = targetLanguage === 'kor' ? '초기화' : 'Reset';
-                translatedMessages.placeholder = placeholderText;
-                translatedMessages.sendBtnText = sendBtnText;
-                translatedMessages.resetBtnText = resetBtnText;
-
-                resolve(translatedMessages);
-            });
-        }
-        function handleAvailableTimes(times) {
-            // 예약 가능한 시간을 처리하는 로직을 작성
-            console.log('Available Times:', times);
-        }
-
-        function handleDateWidget() {
-            var chatContainer = document.getElementById('chat-container');
-            var dateWidget = document.createElement('input');
-            dateWidget.setAttribute('type', 'text'); // input type을 text로 변경
-            dateWidget.setAttribute('id', 'date-widget'); // id 추가
-            dateWidget.setAttribute('placeholder', '날짜를 선택하세요'); // placeholder 추가
-            chatContainer.appendChild(dateWidget);
-
-            // 확인 버튼 추가
-            var confirmButton = document.createElement('button');
-            confirmButton.textContent = '확인';
-            confirmButton.classList.add('menu-button'); // Add a class for styling if needed
-            confirmButton.onclick = function() {
-                var selectedDateTime = dateWidget.value; // 선택된 날짜와 시간 가져오기
-                sendMessage('확인',selectedDateTime); // "확인" 메시지를 보냄
-                console.log(selectedDateTime)
-                // 서버로 선택된 날짜와 시간을 전송하고 예약 가능한 시간을 요청
-
-            };
-
-            // 달력 및 시간 위젯 설정
-            flatpickr(dateWidget, {
-                enableTime: true, // 시간 선택을 가능하게 함
-                dateFormat: "Y-m-d H:i", // 날짜 및 시간 형식 설정
-                onClose: function(selectedDates, dateStr, instance) { // 사용자가 날짜를 선택하고 달력을 닫을 때 실행됨
-                    // 이 부분에서는 선택된 날짜와 시간을 쿼리 문자열로 추가하는 부분입니다.
-                    // 여기서는 선택된 날짜와 시간을 확인 버튼 클릭 이벤트로 이동되어야 합니다.
-                }
-            });
-
-            chatContainer.appendChild(confirmButton);
-        }
-
-
-        document.getElementById('send-btn').addEventListener('click', () => sendMessage());
-        document.getElementById('reset-btn').addEventListener('click', function() {
-            sendMessage('', true);
-            alert('초기화되었습니다. 페이지를 새로고침하세요.');
-        });
-
-        document.getElementById('message-input').addEventListener('keypress', function(event) {
-            if (event.key === "Enter") {
-                sendMessage();
-                event.preventDefault();
-            }
-        });
-
-        document.getElementById('kor-btn').addEventListener('click', function() {
-            changeLanguage('kor');
-        });
-
-        document.getElementById('eng-btn').addEventListener('click', function() {
-            changeLanguage('eng');
-        });
-
-        
-        window.onload = function() {
-            userEmail = new URLSearchParams(window.location.search).get('email');
-            console.log("Loaded userEmail:", userEmail); // 로그 추가하여 이메일 값 확인
-            var promptText = userEmail ? userEmail + "로 입장했습니다." : "비회원으로 입장했습니다.";
-            sendMessage(promptText, false);
-        };
-    </script>
+    <script src="chat.js"></script> <!-- JavaScript 파일 추가 -->
 </body>
 </html>

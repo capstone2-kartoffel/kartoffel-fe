@@ -4,6 +4,7 @@ body, html {
     margin: 0;
     font-family: 'Righteous', 'Cascadia Code SemiBold', 'Jaro', 'Poetsen One', 'Arial' sans-serif;
     display: flex;
+    /*align-items: flex-start;*/
     justify-content: center;
     align-items: center;
     overflow: hidden;
