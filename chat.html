@@ -19,12 +19,8 @@
             <input type="text" id="message-input" placeholder="메시지를 입력하세요">
             <button id="send-btn" aria-label="메시지 보내기"></button>
         </div>
+        <!-- chat-container 아래의 언어 선택 버튼 제거 -->
     </div>
-
-    
-    <button id="reset-btn">초기화</button>
-    <button id="kor-btn">KOR</button>
-    <button id="eng-btn">ENG</button>
     
     <div class="background">
         <div class="circle winterblue"></div>
@@ -35,7 +31,25 @@
         <div class="circle grey"></div>
     </div>
 
+    <!-- 햄버거 아이콘 -->
+    <div class="menu-icon" id="menu-icon">
+        <div class="menu-line"></div>
+        <div class="menu-line"></div>
+        <div class="menu-line"></div>
+    </div>
+
+    <!-- 오른쪽에 슬라이딩되는 창 -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-title">Languages</div>
+        <div class="language-buttons" id="language-buttons">
+            <button id="kor-btn" onclick="changeLanguage('kor')">KOR</button>
+            <button id="eng-btn" onclick="changeLanguage('eng')">ENG</button>
+        </div>
+    </div>
+
+    <!-- 오버레이 -->
+    <div class="overlay" id="overlay"></div>
+
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="chat.js"></script> <!-- JavaScript 파일 추가 -->
-</body>
 </html>
