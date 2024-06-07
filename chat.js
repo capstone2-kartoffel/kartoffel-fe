@@ -45,12 +45,20 @@ function translateKor(detectedLang, text) {
             throw error; // sendMessage 함수에서 추가 처리를 위해 오류를 다시 던집니다
         });
 }
+//수정됨
 async function changeLanguage(targetLang) {
     // 언어 변경
     currentLanguage = targetLang;
     var messages = document.getElementsByClassName('message');
-    //console.log("changeLanguage에 들어온 targetLang: "+targetLang);
-    //console.log("prompText: "+promptText);
+
+    // sidebar가 열려있는지 확인하여 열려 있다면 닫기
+    var sidebar = document.getElementById('sidebar');
+    var overlay = document.getElementById('overlay');
+    if (sidebar.style.right === '0px') {
+        sidebar.style.right = '-250px';
+        overlay.style.display = 'none';
+    }
+
     var detectedStartMsg = await detectLanguage(promptText);
     var promptarr = [
         await translateMsg(promptText, detectedStartMsg, 'EN'), 
@@ -79,6 +87,11 @@ async function changeLanguage(targetLang) {
                     var translatedPrompt = await translateMsg(promptText, detectedLang, 'JA');
                     message.innerHTML = translatedPrompt;
                 }
+                if (targetLang === 'chi') {
+                    var detectedLang = await detectLanguage(promptText);
+                    var translatedPrompt = await translateMsg(promptText, detectedLang, 'ZH');
+                    message.innerHTML = translatedPrompt;
+                }
             } catch (error) {
                 console.error('Error:', error);
             }
@@ -86,35 +99,31 @@ async function changeLanguage(targetLang) {
         try {
             if (targetLang === 'eng' && message.classList.contains('ai')) {
                 var detectedLang = await detectLanguage(message.textContent);
-                //console.log("changeLanguage에 들어온 Msg: " + message.textContent);
-                //console.log(detectedLang+"-> EN");
                 var translatedAiMsg = await translateMsg(message.textContent, detectedLang, 'EN');
                 message.innerHTML = translatedAiMsg;
-                //console.log("영어로 번역 후! translatedAiMsg: " + translatedAiMsg);
             }
             else if (targetLang === 'kor' && message.classList.contains('ai')) {
                 var detectedLang = await detectLanguage(message.textContent);
-                //console.log("changeLanguage에 들어온 Msg: " + message.textContent);
-                //console.log(detectedLang+"-> KO");
-
                 var translatedAiMsg = await translateMsg(message.textContent, detectedLang, 'KO');
                 message.innerHTML = translatedAiMsg;
-                //console.log("한국어로 번역 후! translatedAiMsg: " + translatedAiMsg);
             }
             else if (targetLang === 'jap' && message.classList.contains('ai')) {
-                //console.log("changeLanguage에 들어온 Msg: " + message.textContent);
                 var detectedLang = await detectLanguage(message.textContent);
-                //console.log("detectedLang:" + detectedLang);
                 var translatedAiMsg = await translateMsg(message.textContent, detectedLang, 'JA');
                 message.innerHTML = translatedAiMsg;
-                //console.log("일본어로 번역 후! translatedAiMsg: " + translatedAiMsg);
-
+            }
+            else if (targetLang === 'chi' && message.classList.contains('ai')) {
+                var detectedLang = await detectLanguage(message.textContent);
+                var translatedAiMsg = await translateMsg(message.textContent, detectedLang, 'ZH');
+                message.innerHTML = translatedAiMsg;
             }
         } catch (error) {
             console.error('Error:', error);
         }
     }
 }
+
+
 
 async function translateMsg(text, sourceLang, targetLang) {
     var deeplAPIKey = '929fcdd7-b79a-4bbc-9737-dc580ac5a12f'; // Deepl API 키를 여기에 입력
@@ -418,6 +427,7 @@ document.getElementById('message-input').addEventListener('keypress', function(e
     }
 });
 
+
 // overlay 클릭 시 사이드바 닫기
 overlay.addEventListener('click', function() {
     sidebar.style.right = '-250px';
@@ -470,10 +480,44 @@ window.onload = async function() {
 // 언어 선택 버튼의 onclick 이벤트 핸들러
 document.getElementById('kor-btn').addEventListener('click', function() {
     changeLanguage('kor');  //target language를 kor로!
+    document.getElementById('language-icon').style.backgroundImage = "url('kr-icon.png')";
 });
 document.getElementById('eng-btn').addEventListener('click', function() {
     changeLanguage('eng');
+    document.getElementById('language-icon').style.backgroundImage = "url('eng-icon.png')";
 });
 document.getElementById('jap-btn').addEventListener('click', function() {
     changeLanguage('jap');
+    document.getElementById('language-icon').style.backgroundImage = "url('jp-icon.png')";
+});
+document.getElementById('chi-btn').addEventListener('click', function() {
+    changeLanguage('chi');
+    document.getElementById('language-icon').style.backgroundImage = "url('ch-icon.png')";
+});
+
+document.getElementById('language-icon').style.backgroundImage = "url('default-icon.png')";
+
+// language-icon 클릭 시 순서대로 한국어, 영어, 일본어, 중국어로 번역되고 아이콘도 각 언어에 맞게 변경
+document.getElementById('language-icon').addEventListener('click', function() {
+    var currentIcon = document.getElementById('language-icon').style.backgroundImage;
+    if (currentIcon.includes('default-icon.png')) {
+        changeLanguage('kor');
+        document.getElementById('language-icon').style.backgroundImage = "url('kr-icon.png')";
+    } else if (currentIcon.includes('kr-icon.png')) {
+        changeLanguage('eng');
+        document.getElementById('language-icon').style.backgroundImage = "url('eng-icon.png')";
+    } else if (currentIcon.includes('eng-icon.png')) {
+        changeLanguage('jap');
+        document.getElementById('language-icon').style.backgroundImage = "url('jp-icon.png')";
+    } else if (currentIcon.includes('jp-icon.png')) {
+        changeLanguage('chi');
+        document.getElementById('language-icon').style.backgroundImage = "url('ch-icon.png')";
+    } else if (currentIcon.includes('ch-icon.png')) {
+        changeLanguage('kor');
+        document.getElementById('language-icon').style.backgroundImage = "url('kr-icon.png')";
+    }
+});
+
+document.getElementById('exit-icon').addEventListener('click', function() {
+    window.location.href = 'index.html';
 });
