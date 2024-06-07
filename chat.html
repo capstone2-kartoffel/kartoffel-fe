@@ -14,6 +14,12 @@
         <div id="chat-container">
             <!-- 메뉴 버튼 컨테이너 추가 -->
             <!--<div class="menu-container" id="menu-container"></div>-->
+            <!--<div class="message customer"></div>
+            <div class="ai-message-container">
+                <div class="ai-icon"></div>
+                <div class="message ai"></div>
+            </div>
+            <div class="menu-container"></div>-->
         </div>
         <div class="send-container">
             <input type="text" id="message-input" placeholder="메시지를 입력하세요">
@@ -30,13 +36,19 @@
         <div class="circle summermuteblue"></div>
         <div class="circle grey"></div>
     </div>
+    <div class="header-icons">
+        <!-- Profile icon -->
+        <div class="profile-icon" id="profile-icon">
+        </div>
+        <div class="menu-icon" id="menu-icon">
+            <div class="menu-line"></div>
+            <div class="menu-line"></div>
+            <div class="menu-line"></div>
+        </div>
 
-    <!-- 햄버거 아이콘 -->
-    <div class="menu-icon" id="menu-icon">
-        <div class="menu-line"></div>
-        <div class="menu-line"></div>
-        <div class="menu-line"></div>
     </div>
+    <!-- 햄버거 아이콘 -->
+
 
     <!-- 오른쪽에 슬라이딩되는 창 -->
     <div class="sidebar" id="sidebar">
@@ -44,8 +56,11 @@
         <div class="language-buttons" id="language-buttons">
             <button id="kor-btn" onclick="changeLanguage('kor')">KOR</button>
             <button id="eng-btn" onclick="changeLanguage('eng')">ENG</button>
+            <button id="jap-btn" onclick="changeLanguage('jap')">JAP</button>
+
         </div>
     </div>
+
 
     <!-- 오버레이 -->
     <div class="overlay" id="overlay"></div>

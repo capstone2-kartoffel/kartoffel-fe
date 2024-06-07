@@ -60,8 +60,8 @@ h1 {
 .message {
     padding: 10px;
     border-radius: 5px;
-    margin: 10px 10px;
-    max-width: 70%;
+    margin: 15px 10px;
+    max-width: 60%;
     word-wrap: break-word;
     display: inline-block;
 }
@@ -83,7 +83,22 @@ h1 {
     align-self: flex-end;
     margin-right: auto;
     margin-left: 10px;
+    max-width: 50%;
     text-align: left;
+}
+
+.ai-message-container {
+    display: flex;
+    align-items: flex-start; /* 상단 정렬 */
+}
+
+.ai-message-container .ai-icon {
+    width: 30px;
+    height: 30px;
+    margin-left: 10px;
+    margin-right: 5px;
+    background: url('ai-icon.png') no-repeat center center;
+    background-size: contain;
 }
 
 /*menu style*/
@@ -95,7 +110,9 @@ h1 {
     flex-direction: column; /* 세로 정렬을 위해 flex-direction을 column으로 설정 */
     max-width: 50%;
     gap: 10px;
-    margin-top: 10px;
+    margin-top: 5px;
+    margin-left: 55px !important;
+    margin-bottom: 15px;
     padding: 10px;
 }
 
@@ -116,6 +133,68 @@ h1 {
     background-color: #D9D9D9;
     color: black;
     cursor: not-allowed;
+}
+/*날짜 선택 문제*/
+#date-widget {
+    padding: 10px;
+    font-size: 14px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Styles for the time buttons */
+.time-buttons-container {
+    display: flex;
+    flex-wrap: wrap;
+    /*gap: 10px;*/
+}
+
+.time-button {
+    font-size: 14px;
+    padding: 10px, 15px;
+    border: 2px solid #BCCBFF;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+    color: #4765FF;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.time-button:hover {
+    border: 2px solid #4765FF;
+    background-color: #4765FF;
+    color: #ffffff;
+}
+
+/* Custom styles for the flatpickr date picker */
+.flatpickr-calendar {
+    background-color: #f8f9fa !important; /* Background color of the calendar */
+    border: 1px solid #BCCBFF !important; /* Border color of the calendar */
+    border-radius: 5px !important; /* Rounded corners */
+    padding-left: 10px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2) !important; /* Shadow for the calendar */
+}
+/* Custom styles for the days on hover */
+.flatpickr-day:hover {
+    background-color: #4765FF !important; /* Background color of the day on hover */
+    color: #ffffff !important; /* Text color of the day on hover */
+    border: 1px solid #4765FF !important;
+}
+
+/* Custom styles for the selected day */
+.flatpickr-day.selected {
+    background-color: #BCCBFF !important; /* Background color of the selected day */
+    border: 1px solid #BCCBFF !important;
+    color: #ffffff !important; /* Text color of the selected day */
+}
+/* Custom styles for the current day */
+.flatpickr-day.today {
+    border: 1px solid #9EB9E3 !important;
+}
+
+/* Custom styles for the navigation buttons on hover */
+.flatpickr-prev-month:hover, .flatpickr-next-month:hover {
+    color: #4765FF !important; /* 호버 시 텍스트 색상 */
 }
 
 /*보내기 버튼*/
@@ -241,13 +320,48 @@ h1 {
         overflow-y: auto;
     }
 }
+
+.header-icons {
+    position: fixed;
+    top: 20px;
+    right: 60px;
+    display: flex;
+    align-items: center;
+    z-index: 2;
+}
+
+.profile-icon {
+    background-image: url('profile-icon.png');
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    background-size: cover;
+    background-color: #4765FF; /* 프로필 아이콘의 배경색 변경 */
+    margin-right: 20px;
+    position: fixed;
+    top: 20px;
+    right: 40px;
+    z-index: 2;
+    transition: right 0.3s ease;
+    border-radius: 50%; /* 프로필 아이콘을 원 모양으로 설정 */
+}
+
+.profile-icon:active {
+    background-color: #BCCBFF; /* 클릭된 상태일 때의 배경색 */
+    transform: scale(1.1); /* 클릭된 상태일 때 약간 확대 */
+}
+
+.sidebar.active + .profile-icon {
+    right: 290px;
+}
+
 /* 햄버거 아이콘 스타일 */
 .menu-icon {
     position: fixed;
     top: 20px;
     right: 20px;
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
     cursor: pointer;
     z-index: 2; /* 햄버거 아이콘은 가장 위에 배치 */
 }
@@ -282,7 +396,7 @@ h1 {
     height: 100%;
     background-color: white;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    z-index: 1; /* 햄버거 아이콘 아래에 배치 */
+    z-index: 3; /* 햄버거 아이콘 아래에 배치 */
     transition: right 0.3s ease; /* 슬라이딩 효과를 위한 transition 속성 */
 }
 

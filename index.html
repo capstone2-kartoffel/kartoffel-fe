@@ -7,26 +7,52 @@
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    
+
 <div class="background">
     <div class="circle winterblue"></div>
-    <div class="circle summerlightblue"></div>
-    <div class="circle springlightblue"></div>
-    <div class="circle autumnmuteblue"></div>
     <div class="circle summermuteblue"></div>
     <div class="circle grey"></div>
-    <div class="title">Space Chat</div>
+    <div class="circle autumnmuteblue"></div>
+    <div class="circle springlightblue"></div>
+    <div class="circle summerlightblue" onclick="redirectToLogin()"></div> <!-- 수정된 부분 -->
+    <div class="title" id="title"> </div>
+    <p onclick="redirectToLogin()">press here to start</p> <!-- 수정된 부분 -->
 </div>
+
 <script>
-// 페이지의 모든 요소를 감싸는 부모 요소에 이벤트 리스너를 추가합니다.
-document.querySelector('body').addEventListener('click', function(event) {
-    // 클릭된 요소의 태그 이름을 가져옵니다.
-    var clickedElement = event.target.tagName.toLowerCase();
-  
-        // 클릭된 요소가 위의 태그 중 하나가 아니라면 로그인 페이지로 리디렉션합니다.
-        window.location.href = 'login.html'; // 실제 로그인 페이지 URL로 바꿉니다.
+document.addEventListener('DOMContentLoaded', function() {
+    // Circles appear one by one
+    var circles = document.querySelectorAll('.circle');
+    circles.forEach(function(circle, index) {
+        setTimeout(function() {
+            if (circle.classList.contains('summerlightblue')) {
+                // If it's the summerlightblue circle, show the text after it appears
+                showText();
+            }
+            circle.style.opacity = '1';
+        }, index * 150); // Adjust the timing as needed
+    });
+
+    // Function to show the text gradually
+    function showText() {
+        var text = "Space Chat";
+        var title = document.getElementById('title');
+        var delay = 40; // Adjust the delay between each character
+        var index = 0;
+        var intervalId = setInterval(function() {
+            title.textContent += text[index];
+            index++;
+            if (index === text.length) {
+                clearInterval(intervalId); // Stop the interval when all characters are shown
+            }
+        }, delay);
+    }
 });
+
+// Function to redirect to login.html
+function redirectToLogin() {
+    window.location.href = "login.html";
+}
 </script>
-<p>press here to start</p>
 </body>
 </html>

@@ -27,7 +27,14 @@ body, html {
 .circle {
     position: relative;
     border-radius: 50%;
+    transition: opacity 0.5s ease-in-out; /* Smooth transition */
+    opacity: 0; /* Initially invisible */
 }
+.visible {
+    opacity: 1; /* Make visible */
+}
+
+
 
 .winterblue {
     position: absolute;
@@ -112,6 +119,15 @@ p{
     border-radius: 20px;
     padding: 3px;
     cursor: pointer;
+}
+
+@keyframes move {
+    0%, 100% {
+        transform: translate(0, 0);
+    }
+    50% {
+        transform: translate(20px, 20px);
+    }
 }
 
 /* 미디어 쿼리 추가 */
