@@ -51,6 +51,12 @@ async function changeLanguage(targetLang) {
     currentLanguage = targetLang;
     var messages = document.getElementsByClassName('message');
 
+    var dateWidget = document.getElementById('date-widget');
+    if (dateWidget) {
+        dateWidget.setAttribute('placeholder', getPlaceholderText());
+    }
+    getPlaceholderTextForInput();
+    
     // sidebar가 열려있는지 확인하여 열려 있다면 닫기
     var sidebar = document.getElementById('sidebar');
     var overlay = document.getElementById('overlay');
@@ -123,8 +129,6 @@ async function changeLanguage(targetLang) {
     }
 }
 
-
-
 async function translateMsg(text, sourceLang, targetLang) {
     var deeplAPIKey = '929fcdd7-b79a-4bbc-9737-dc580ac5a12f'; // Deepl API 키를 여기에 입력
     var deeplEndpoint = 'https://api.deepl.com/v2/translate'; // Deepl API 엔드포인트
@@ -189,6 +193,10 @@ async function sendMessage(messageToSend = null, selectedDateTime = null, reset 
 
             var aiMsg = document.createElement('div');
             aiMsg.classList.add('message', 'ai');
+
+            if (data.status === 'success' && data.message === 'chat_with_manager') {
+                window.location.href = 'customer.html';
+            }
 
             if (data.return_message) {
                 aiMsg.innerHTML = data.return_message.replace(/\n/g, '<br>');
@@ -278,6 +286,8 @@ async function sendMessage(messageToSend = null, selectedDateTime = null, reset 
 
             var menuItems = (data.return_menu && typeof data.return_menu === 'string') ? data.return_menu.split(',') : [];
 
+            console.log(menuItems);
+
             if (menuItems.includes('날짜위젯')) {
                 handleDateWidget();
             } else if (menuItems.includes('OK')) {
@@ -319,9 +329,6 @@ async function sendMessage(messageToSend = null, selectedDateTime = null, reset 
     }
 }
 
-
-
-
 function handleAvailableTimes(times) {
     var availableTimes = times.split(',');
     flatpickr(dateWidget, {
@@ -340,12 +347,26 @@ function handleAvailableTimes(times) {
         })
     });
 }
+
+var placeholderDateKor = '날짜를 선택하세요';
+var placeholderDateEng = 'Select a date';
+var placeholderDateJap = '日付を選択してください';
+var placeholderDateChi = '选择日期';
+
+var messagePlaceholderKor = '메시지를 입력하세요';
+var messagePlaceholderEng = 'Enter your message';
+var messagePlaceholderJap = 'メッセージを入力してください';
+var messagePlaceholderChi = '输入你的信息';
+
+
 function handleDateWidget() {
     var chatContainer = document.getElementById('chat-container');
     var dateWidget = document.createElement('input');
     dateWidget.setAttribute('type', 'text');
     dateWidget.setAttribute('id', 'date-widget');
-    dateWidget.setAttribute('placeholder', '날짜를 선택하세요');
+    //dateWidget.setAttribute('placeholder', placeholderDateKor);
+    dateWidget.setAttribute('placeholder', getPlaceholderText());
+
     chatContainer.appendChild(dateWidget);
 
     var timeButtonsContainer = document.createElement('div');
@@ -414,6 +435,49 @@ function handleDateWidget() {
     }
 }
 
+function getPlaceholderText() {
+    switch (currentLanguage) {
+        case 'eng':
+            return placeholderDateEng;
+        case 'jap':
+            return placeholderDateJap;
+        case 'chi':
+            return placeholderDateChi;
+        case 'kor':
+        default:
+            return placeholderDateKor;
+    }
+}
+
+function getPlaceholderTextForInput() {
+    var messageInput = document.getElementById('message-input');
+    switch (currentLanguage) {
+        case 'eng':
+            messageInput.placeholder = messagePlaceholderEng;
+            break;
+        case 'jap':
+            messageInput.placeholder = messagePlaceholderJap;
+            break;
+        case 'chi':
+            messageInput.placeholder = messagePlaceholderChi;
+            break;
+        case 'kor':
+        default:
+            messageInput.placeholder = messagePlaceholderKor;
+    }
+}
+
+//수정
+//프로필 변경
+// Function to update the profile icon with the stored profile photo URL
+function updateProfileIcon() {
+    const profilePhotoURL = localStorage.getItem('profilePhotoURL');
+    if (profilePhotoURL) {
+        const profileIcon = document.getElementById('profile-icon');
+        profileIcon.src = profilePhotoURL;
+    }
+}
+
 document.getElementById('send-btn').addEventListener('click', () => {
     console.log('send-btn');
     sendMessage();
@@ -422,11 +486,10 @@ document.getElementById('send-btn').addEventListener('click', () => {
 document.getElementById('message-input').addEventListener('keypress', function(event) {
     if (event.key === "Enter") {
         event.preventDefault();
-        console.log('message-input');
+        //console.log('message-input');
         sendMessage();
     }
 });
-
 
 // overlay 클릭 시 사이드바 닫기
 overlay.addEventListener('click', function() {
@@ -435,6 +498,8 @@ overlay.addEventListener('click', function() {
 });
 
 window.onload = async function() {
+    //수정, 프로필 추가
+    updateProfileIcon();
     userEmail = new URLSearchParams(window.location.search).get('email');
     console.log("Loaded userEmail:", userEmail);
     promptText = userEmail ? userEmail + " 님 입장했습니다" : "비회원으로 입장했습니다.";
@@ -477,23 +542,31 @@ window.onload = async function() {
     });
 };
 
+
 // 언어 선택 버튼의 onclick 이벤트 핸들러
 document.getElementById('kor-btn').addEventListener('click', function() {
+    console.log('한국어버튼 누름');
     changeLanguage('kor');  //target language를 kor로!
     document.getElementById('language-icon').style.backgroundImage = "url('kr-icon.png')";
 });
 document.getElementById('eng-btn').addEventListener('click', function() {
+    console.log('영어버튼 누름');
     changeLanguage('eng');
     document.getElementById('language-icon').style.backgroundImage = "url('eng-icon.png')";
 });
 document.getElementById('jap-btn').addEventListener('click', function() {
+    console.log('일본어버튼 누름');
     changeLanguage('jap');
     document.getElementById('language-icon').style.backgroundImage = "url('jp-icon.png')";
 });
 document.getElementById('chi-btn').addEventListener('click', function() {
+    console.log('중국어버튼 누름');
     changeLanguage('chi');
     document.getElementById('language-icon').style.backgroundImage = "url('ch-icon.png')";
 });
+
+// 초기 위젯 설정
+//handleDateWidget();
 
 document.getElementById('language-icon').style.backgroundImage = "url('default-icon.png')";
 
@@ -516,8 +589,4 @@ document.getElementById('language-icon').addEventListener('click', function() {
         changeLanguage('kor');
         document.getElementById('language-icon').style.backgroundImage = "url('kr-icon.png')";
     }
-});
-
-document.getElementById('exit-icon').addEventListener('click', function() {
-    window.location.href = 'index.html';
 });

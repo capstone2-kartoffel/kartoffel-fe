@@ -17,10 +17,12 @@ h1 {
     flex-direction: column;
     font-size: 48px;
     font-weight: bold;
+    position: relative; /* Ensure h1 respects the flow of the document */
+    margin-top: 60px; /* Add space for the header-icons */
 }
 
 #chat-outline {
-    height: 80%; /* 원하는 높이로 조정 */
+    height: 70%; /* 원하는 높이로 조정 */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -222,7 +224,7 @@ h1 {
     height: 50px; /* 버튼의 높이 설정 (상하 여백 포함) */
     background-repeat: no-repeat;
     background-position: center;
-    background-color: #BCEFFF;
+    background-color: #BCCBFF;
     color: white;
     border: none;
     cursor:pointer;
@@ -310,7 +312,7 @@ h1 {
     right: 60px;
     display: flex;
     align-items: center;
-    z-index: 2;
+    z-index: 1; /* Ensure header-icons are on top */
 }
 
 .profile-icon {
@@ -324,7 +326,7 @@ h1 {
     position: fixed;
     top: 20px;
     right: 40px;
-    z-index: 2;
+    z-index: 1; /* Ensure profile icon is above other elements */
     transition: right 0.3s ease;
     border-radius: 50%; /* 프로필 아이콘을 원 모양으로 설정 */
 }
@@ -335,7 +337,8 @@ h1 {
 }
 
 .sidebar.active + .profile-icon {
-    right: 290px;
+    right: 320px; /* Adjust the right position to accommodate the sidebar */
+    visibility: hidden; /* Hide the language icon when sidebar is active */
 }
 
 /* 햄버거 아이콘 스타일 */
@@ -460,7 +463,7 @@ h1 {
     position: fixed;
     top: 20px;
     right: 90px;
-    z-index: 2;
+    z-index: 1001; /* Ensure language icon is above other elements */
     transition: right 0.3s ease;
     border-radius: 50%;
 }
@@ -470,7 +473,11 @@ h1 {
     transform: scale(1.1);
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 600px) {
+    h1{
+        font-size: 40px;
+        font-weight: bold;
+    }
     body, html {
         overflow: hidden;
         height: 100%;
@@ -486,5 +493,4 @@ h1 {
         overflow-y: auto;
     }
 }
-
 

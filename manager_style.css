@@ -1,0 +1,152 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.chat-container {
+    display: flex;
+    height: 100%;
+}
+
+.chat-placeholder {
+    width: 50%;
+    background-color: #f0f0f0;
+}
+
+.chat-content {
+    width: 50%;
+    height: 100%;
+    overflow-y: auto; /* 스크롤바 추가 */
+}
+
+.chat-sidebar {
+    background-color: #34495e;
+    color: white;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    height: 100%;
+}
+
+.chat-sidebar h2 {
+    margin-top: 0;
+    text-align: center;
+    color: #ecf0f1;
+}
+
+.chat-sidebar button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #3b5998;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: left;
+    font-size: 16px;
+}
+
+.chat-sidebar button:hover {
+    background-color: #4c70ba;
+}
+
+.chat-main {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.back-button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px;
+    align-self: flex-start;
+}
+
+.back-button:hover {
+    background-color: #2980b9;
+}
+
+#chat {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 10px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+#chatHeader {
+    text-align: center;
+    color: #2c3e50;
+}
+
+.chat-messages {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    background-color: #ecf0f1;
+    border: 1px solid #bdc3c7;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.message {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 70%;
+    word-wrap: break-word;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.message.sent {
+    background-color: #3498db;
+    color: white;
+    align-self: flex-end;
+}
+
+.message.received {
+    background-color: #e1e1e1;
+    align-self: flex-start;
+}
+
+.chat-input {
+    display: flex;
+    padding: 10px;
+    background-color: #ecf0f1;
+    border-top: 1px solid #bdc3c7;
+    border-radius: 5px;
+}
+
+.chat-input input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #bdc3c7;
+    border-radius: 5px;
+    margin-right: 10px;
+    box-sizing: border-box;
+}
+
+.chat-input button {
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.chat-input button:hover {
+    background-color: #2980b9;
+}

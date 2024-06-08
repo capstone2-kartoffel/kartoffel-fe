@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer Chat</title>
+    <link rel="stylesheet" href="customer_style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.min.js"></script>
+    <script src="customer.js" defer></script>
+</head>
+<body>
+    <div class="chat-container">
+        <h1 class="chat-header">Customer Chat</h1>
+        <div id="messages" class="chat-messages"></div>
+        <div class="chat-input">
+            <input id="messageInput" type="text" placeholder="Type a message...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+</body>
+</html>
